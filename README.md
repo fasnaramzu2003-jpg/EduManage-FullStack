@@ -4,11 +4,12 @@
 # EduManage - Full Stack School Management System
 
 A comprehensive Full-Stack web application built to manage educational institution workflows including Students, Teachers, Courses, and Attendance. 
-
+## Live Demo
+Check out the live application here: **[EduManage Live](https://edu-manage-full-stack.vercel.app)**
 ## 🚀 Tech Stack
 - **Backend:** Python, Django, Django REST Framework (DRF)
 - **Frontend:** React.js, Vite, CSS3
-- **Database:** SQLite (Development)
+- **Database:** SQLite (Local) / PostgreSQL (Production)
 - **Tools:** Git, GitHub
 
 ## ✨ Features
