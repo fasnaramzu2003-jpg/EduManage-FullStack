@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-
 function AttendanceList({ onDataAdded }) {
   const [attendance, setAttendance] = useState([]);
   const [students, setStudents] = useState([]);
@@ -7,18 +6,18 @@ function AttendanceList({ onDataAdded }) {
   const [formData, setFormData] = useState({ student: '', course: '', date: new Date().toISOString().split('T')[0], status: 'Present' });
 
   const fetchAttendance = () => {
-    fetch('http://127.0.0.1:8000/api/attendance/').then(res => res.json()).then(data => setAttendance(data));
+    fetch('https://edumanage-fullstack.onrender.com/api/attendance/').then(res => res.json()).then(data => setAttendance(data));
   };
 
   useEffect(() => { 
     fetchAttendance();
-    fetch('http://127.0.0.1:8000/api/students/').then(res => res.json()).then(data => setStudents(data));
-    fetch('http://127.0.0.1:8000/api/courses/').then(res => res.json()).then(data => setCourses(data));
+    fetch('https://edumanage-fullstack.onrender.com/api/students/').then(res => res.json()).then(data => setStudents(data));
+    fetch('https://edumanage-fullstack.onrender.com/api/courses/').then(res => res.json()).then(data => setCourses(data));
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('http://127.0.0.1:8000/api/attendance/', {
+    fetch('https://edumanage-fullstack.onrender.com/api/attendance/', {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(formData)
     }).then(() => { fetchAttendance(); onDataAdded(); setFormData({...formData, student: '', course: ''}); });
   };

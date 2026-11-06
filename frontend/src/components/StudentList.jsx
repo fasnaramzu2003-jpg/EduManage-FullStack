@@ -5,7 +5,7 @@ function StudentList({ onDataAdded }) {
   const [formData, setFormData] = useState({ first_name: '', last_name: '', email: '', phone: '', age: '' });
 
   const fetchStudents = () => {
-    fetch('http://127.0.0.1:8000/api/students/')
+    fetch('https://edumanage-fullstack.onrender.com/api/students/')
       .then(res => res.json()).then(data => setStudents(data));
   };
 
@@ -13,7 +13,7 @@ function StudentList({ onDataAdded }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('http://127.0.0.1:8000/api/students/', {
+    fetch('https://edumanage-fullstack.onrender.com/api/students/', {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(formData)
     }).then(res => {
       if(res.ok) { fetchStudents(); onDataAdded(); setFormData({ first_name: '', last_name: '', email: '', phone: '', age: '' }); }
@@ -22,7 +22,7 @@ function StudentList({ onDataAdded }) {
 
   const handleDelete = (id) => {
     if(window.confirm("Delete this student?")) {
-      fetch(`http://127.0.0.1:8000/api/students/${id}/`, { method: 'DELETE' })
+      fetch(`https://edumanage-fullstack.onrender.com/api/students/${id}/`, { method: 'DELETE' })
       .then(() => fetchStudents());
     }
   };

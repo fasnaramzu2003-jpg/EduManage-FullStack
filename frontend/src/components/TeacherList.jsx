@@ -5,14 +5,14 @@ function TeacherList({ onDataAdded }) {
   const [formData, setFormData] = useState({ first_name: '', last_name: '', email: '', phone: '', subject: '' });
 
   const fetchTeachers = () => {
-    fetch('http://127.0.0.1:8000/api/teachers/').then(res => res.json()).then(data => setTeachers(data));
+    fetch('https://edumanage-fullstack.onrender.com/api/teachers/').then(res => res.json()).then(data => setTeachers(data));
   };
 
   useEffect(() => { fetchTeachers(); }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('http://127.0.0.1:8000/api/teachers/', {
+    fetch('https://edumanage-fullstack.onrender.com/api/teachers/', {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(formData)
     }).then(() => { fetchTeachers(); onDataAdded(); setFormData({ first_name: '', last_name: '', email: '', phone: '', subject: '' }); });
   };
