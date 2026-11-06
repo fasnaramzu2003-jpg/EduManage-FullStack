@@ -1,5 +1,6 @@
 
 
+
 # EduManage - Full Stack School Management System
 
 A comprehensive Full-Stack web application built to manage educational institution workflows including Students, Teachers, Courses, and Attendance. 
@@ -32,7 +33,7 @@ python manage.py migrate
 # Start server
 python manage.py runserver
 
-### 2. Frontend Setup (React)
+###2. Frontend Setup (React)
 
 Open a new terminal and run the following commands:
 ```bash
