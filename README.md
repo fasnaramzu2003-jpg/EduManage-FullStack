@@ -36,13 +36,12 @@ python manage.py runserver
 ###2. Frontend Setup (React)
 
 Open a new terminal and run the following commands:
-```bash
 cd frontend
 npm install
 npm run dev
 
-`### 3. 🔗 API Endpoints`
-```bash
+### 3. 🔗 API Endpoints
+
 - `GET/POST /api/students/`
 - `GET/POST /api/teachers/`
 - `GET/POST /api/courses/`
