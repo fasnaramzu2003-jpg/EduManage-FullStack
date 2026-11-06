@@ -17,3 +17,7 @@ class CourseListCreateView(generics.ListCreateAPIView):
 class AttendanceListCreateView(generics.ListCreateAPIView):
     queryset = Attendance.objects.all().order_by('-date')
     serializer_class = AttendanceSerializer
+
+class StudentDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
