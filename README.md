@@ -32,9 +32,10 @@ python manage.py migrate
 # Start server
 python manage.py runserver
 
-`### 2. Frontend Setup (React)`
+### 2. Frontend Setup (React)
+
+Open a new terminal and run the following commands:
 ```bash
-Open a new terminal:
 cd frontend
 npm install
 npm run dev
