@@ -1,4 +1,5 @@
 
+
 # EduManage - Full Stack School Management System
 
 A comprehensive Full-Stack web application built to manage educational institution workflows including Students, Teachers, Courses, and Attendance. 
@@ -31,13 +32,15 @@ python manage.py migrate
 # Start server
 python manage.py runserver
 
-### 2. Frontend Setup (React)
+`### 2. Frontend Setup (React)`
+```bash
 Open a new terminal:
 cd frontend
 npm install
 npm run dev
 
-### 3. 🔗 API Endpoints
+`### 3. 🔗 API Endpoints`
+```bash
 - `GET/POST /api/students/`
 - `GET/POST /api/teachers/`
 - `GET/POST /api/courses/`
