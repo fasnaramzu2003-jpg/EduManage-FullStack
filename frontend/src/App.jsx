@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import { FiHome, FiUsers, FiBookOpen, FiCalendar, FiSettings, FiLogOut, FiBell } from 'react-icons/fi';
+import { FiHome, FiUsers, FiBookOpen, FiCalendar } from 'react-icons/fi';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 
@@ -13,16 +13,13 @@ function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [refreshKey, setRefreshKey] = useState(0);
   
-  
   const [stats, setStats] = useState({ students: 0, teachers: 0, courses: 0, attendance: 0 });
   const [chartData, setChartData] = useState([]);
 
-  
   const API_URL = 'https://edumanage-fullstack.onrender.com/api';
 
   const fetchDashboardData = async () => {
     try {
-      
       const [stuRes, teaRes, couRes, attRes] = await Promise.all([
         fetch(`${API_URL}/students/`),
         fetch(`${API_URL}/teachers/`),
@@ -35,7 +32,6 @@ function App() {
       const courses = await couRes.json();
       const attendance = await attRes.json();
 
-      
       setStats({
         students: students.length,
         teachers: teachers.length,
@@ -43,7 +39,6 @@ function App() {
         attendance: attendance.length
       });
 
-      
       const realStudentCount = students.length || 0;
       setChartData([
         { name: 'Jul', students: Math.floor(realStudentCount * 0.2) },
@@ -59,12 +54,10 @@ function App() {
     }
   };
 
-  // Fetch data when the app loads or when refreshKey changes
   useEffect(() => {
     fetchDashboardData();
   }, [refreshKey]);
 
-  // Trigger refresh when data is added/deleted in child components
   const handleDataAdded = () => setRefreshKey(oldKey => oldKey + 1);
 
   return (
@@ -73,32 +66,35 @@ function App() {
       {/* SIDEBAR */}
       <div className="sidebar">
         <div className="logo-area">🎓 EduManage</div>
+        
+        {/* CHANGED TO BUTTONS FOR KEYBOARD NAVIGATION */}
         <div className="menu">
-          <div className={`menu-item ${activeTab === 'dashboard' ? 'active' : ''}`} onClick={() => setActiveTab('dashboard')}><FiHome /> Dashboard</div>
-          <div className={`menu-item ${activeTab === 'students' ? 'active' : ''}`} onClick={() => setActiveTab('students')}><FiUsers /> Students</div>
-          <div className={`menu-item ${activeTab === 'teachers' ? 'active' : ''}`} onClick={() => setActiveTab('teachers')}><FiUsers /> Teachers</div>
-          <div className={`menu-item ${activeTab === 'courses' ? 'active' : ''}`} onClick={() => setActiveTab('courses')}><FiBookOpen /> Courses</div>
-          <div className={`menu-item ${activeTab === 'attendance' ? 'active' : ''}`} onClick={() => setActiveTab('attendance')}><FiCalendar /> Attendance</div>
-        </div>
-        <div className="menu">
-          <div className="menu-item"><FiSettings /> Settings</div>
-          <div className="menu-item"><FiLogOut /> Logout</div>
+          <button className={`menu-item ${activeTab === 'dashboard' ? 'active' : ''}`} onClick={() => setActiveTab('dashboard')}>
+            <FiHome /> Dashboard
+          </button>
+          <button className={`menu-item ${activeTab === 'students' ? 'active' : ''}`} onClick={() => setActiveTab('students')}>
+            <FiUsers /> Students
+          </button>
+          <button className={`menu-item ${activeTab === 'teachers' ? 'active' : ''}`} onClick={() => setActiveTab('teachers')}>
+            <FiUsers /> Teachers
+          </button>
+          <button className={`menu-item ${activeTab === 'courses' ? 'active' : ''}`} onClick={() => setActiveTab('courses')}>
+            <FiBookOpen /> Courses
+          </button>
+          <button className={`menu-item ${activeTab === 'attendance' ? 'active' : ''}`} onClick={() => setActiveTab('attendance')}>
+            <FiCalendar /> Attendance
+          </button>
         </div>
       </div>
 
       {/* MAIN CONTENT */}
       <div className="main-content">
         
-        {/* TOPBAR */}
+        {/* SIMPLIFIED TOPBAR (Removed Search, Bell, Admin) */}
         <div className="topbar">
-          <input type="text" className="search-bar" placeholder="Search students, teachers, courses..." />
-          <div className="topbar-right">
-            <FiBell size={22} color="#64748b" />
-            <div className="admin-profile">
-              <img src="https://ui-avatars.com/api/?name=Admin&background=2563eb&color=fff&rounded=true" alt="Admin" width="40" />
-              Admin
-            </div>
-          </div>
+          <h2 style={{ color: '#64748b', fontSize: '1.2rem', fontWeight: 600 }}>
+            {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} Management
+          </h2>
         </div>
 
         {/* DYNAMIC CONTENT AREA */}
@@ -106,18 +102,17 @@ function App() {
           
           {activeTab === 'dashboard' && (
             <>
-              {/* WELCOME BANNER WITH SCHOOL IMAGE */}
               <div className="welcome-banner">
                 <div className="banner-text">
                   <h1>Welcome to EduManage 👋</h1>
                   <p>Manage students, teachers, courses, and attendance — all in one place.</p>
                 </div>
                 <div className="banner-image">
-                  <img src="https://cdn3d.iconscout.com/3d/premium/thumb/school-4736761-3951032.png" alt="School Building" />
+                  {/* NEW RELIABLE IMAGE LINK */}
+                  <img src="https://cdn-icons-png.flaticon.com/512/2602/2602419.png" alt="School Building" />
                 </div>
               </div>
 
-              {/* REAL DATA STATS */}
               <div className="stats-grid">
                 <div className="stat-card">
                   <div className="stat-icon" style={{ background: '#e0f2fe', color: '#0284c7' }}><FiUsers /></div>
@@ -149,7 +144,6 @@ function App() {
                 </div>
               </div>
 
-              {/* REAL CHART AND QUICK ACTIONS */}
               <div className="middle-grid">
                 <div className="card">
                   <div className="card-header"><h2>Student Enrollment Trend</h2></div>
@@ -177,7 +171,6 @@ function App() {
             </>
           )}
 
-          {/* YOUR ACTUAL COMPONENTS RENDER HERE */}
           {activeTab === 'students' && <StudentList key={refreshKey} onDataAdded={handleDataAdded} />}
           {activeTab === 'teachers' && <TeacherList key={refreshKey} onDataAdded={handleDataAdded} />}
           {activeTab === 'courses' && <CourseList key={refreshKey} onDataAdded={handleDataAdded} />}
