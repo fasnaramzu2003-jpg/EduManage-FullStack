@@ -89,82 +89,71 @@ th { background-color: #f8fafc; color: var(--text-muted); font-weight: 600; font
 
 
 @media (max-width: 768px) {
-  /* 1. Change layout from Side-by-Side to Top-to-Bottom */
+  /* Keep the layout side-by-side */
   .app-container {
-    flex-direction: column;
-    height: auto;
+    flex-direction: row; 
+    overflow-x: auto; /* Allow scrolling if it's too wide */
   }
 
-  /* 2. Make the sidebar horizontal (like a top menu) */
+  /* Make the sidebar much smaller (Icon only) */
   .sidebar {
-    width: 100%;
-    height: auto;
-    flex-direction: row;
-    overflow-x: auto;
-    padding: 10px;
-    border-bottom: 1px solid #1e293b;
+    width: 70px; 
+    flex-shrink: 0;
+  }
+
+  /* Hide the text in the menu, show only icons */
+  .menu-item {
+    justify-content: center;
+    padding: 15px 0;
+    font-size: 0; /* Hides the text */
+  }
+
+  /* Make the icons bigger so they are clickable */
+  .menu-item svg {
+    font-size: 24px; 
+    margin: 0;
   }
 
   .logo-area {
-    display: none; /* Hide logo on mobile to save space */
+    font-size: 0; /* Hide "EduManage" text */
+    justify-content: center;
+    padding: 15px 0;
+  }
+  
+  .logo-area::before {
+    content: "🎓";
+    font-size: 24px; /* Show only the graduation cap */
   }
 
-  .menu {
-    flex-direction: row;
-    padding: 0;
+  /* Make the main content fit the rest of the screen */
+  .main-content {
+    width: calc(100vw - 70px);
+    overflow-x: hidden;
+  }
+
+  /* Stack the cards into 1 column so they fit */
+  .stats-grid {
+    grid-template-columns: 1fr; 
     gap: 10px;
   }
 
-  .menu-item {
-    padding: 10px 15px;
-    white-space: nowrap;
-    border-left: none !important; /* Remove desktop left-border */
-    border-bottom: 3px solid transparent;
-    border-radius: 8px;
-  }
-
-  .menu-item.active {
-    border-left: none;
-    border-bottom: 3px solid #60a5fa; /* Add bottom border for active */
-  }
-
-  /* 3. Adjust the main content to fill the screen */
-  .main-content {
-    width: 100%;
-    overflow-y: visible;
-  }
-
-  /* 4. Stack the grids on top of each other */
-  .stats-grid {
-    grid-template-columns: 1fr; /* 1 column instead of 4 */
-  }
-
   .middle-grid {
-    grid-template-columns: 1fr; /* 1 column instead of 2 */
+    grid-template-columns: 1fr; 
   }
 
-  /* 5. Adjust the Welcome Banner */
+  /* Adjust the banner */
   .welcome-banner {
     flex-direction: column;
     text-align: center;
-    padding: 20px;
+    padding: 15px;
   }
-
+  
   .banner-text {
     max-width: 100%;
-    margin-bottom: 20px;
   }
 
   .banner-image img {
-    width: 150px;
-  }
-
-  /* 6. Make the form inputs stack vertically */
-  .form-container form {
-    flex-direction: column;
-  }
-  
-  .action-grid {
-    grid-template-columns: 1fr; /* Stack Quick Action buttons */
+    width: 100px;
+    margin-top: 10px;
   }
 }
