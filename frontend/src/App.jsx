@@ -90,11 +90,16 @@ function App() {
       {/* MAIN CONTENT */}
       <div className="main-content">
         
-        {/* SIMPLIFIED TOPBAR (Removed Search, Bell, Admin) */}
+        
+        {/* TOPBAR */}
         <div className="topbar">
-          <h2 style={{ color: '#64748b', fontSize: '1.2rem', fontWeight: 600 }}>
-            {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} Management
-          </h2>
+            <h2 style={{ color: '#2563eb', fontSize: '1.1rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '5px', margin: 0 }}>
+               🎓 EduManage
+            </h2>
+  
+           <h2 style={{ color: '#64748b', fontSize: '0.9rem', fontWeight: 600, margin: 0 }}>
+              {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
+           </h2>
         </div>
 
         {/* DYNAMIC CONTENT AREA */}

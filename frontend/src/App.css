@@ -87,56 +87,97 @@ th { background-color: #f8fafc; color: var(--text-muted); font-weight: 600; font
 .delete-btn { background: #fee2e2; color: #ef4444; border: none; padding: 8px 16px; border-radius: 6px; font-weight: 600; cursor: pointer; transition: 0.2s; }
 .delete-btn:hover { background: #fecaca; }
 
+
+
 @media (max-width: 768px) {
-  /* Force the layout to stay side-by-side */
+  /* 1. Force layout to stack vertically */
   .app-container {
-    flex-direction: row; 
-    width: 100vw;
+    flex-direction: column;
     height: 100vh;
-    overflow: auto; /* Allow scrolling if it overflows */
+    width: 100vw;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
-  /* Keep the sidebar exactly the same size */
+  /* 2. Turn Sidebar into a Top Navigation Bar */
   .sidebar {
-    width: 200px; /* Slightly reduced from 260px to give content a bit more room */
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 10px;
+    border-bottom: 1px solid #1e293b;
     flex-shrink: 0;
   }
 
-  /* Keep the menu text visible */
+  /* Hide the big logo to save space */
+  .logo-area {
+    display: none; 
+  }
+
+  .menu {
+    flex-direction: row;
+    padding: 0;
+    gap: 10px;
+  }
+
   .menu-item {
-    padding: 12px 15px;
-    font-size: 0.9rem; 
+    padding: 10px 15px;
+    white-space: nowrap;
+    border-left: none !important;
+    border-bottom: 3px solid transparent;
+    border-radius: 8px;
+    font-size: 0.9rem;
   }
 
-  /* Allow the main content to fill the rest of the screen */
+  .menu-item.active {
+    border-bottom: 3px solid #60a5fa; 
+    background-color: rgba(37, 99, 235, 0.1); 
+  }
+
+  /* 3. Main Content Fills Rest of Screen */
   .main-content {
-    width: calc(100vw - 200px);
-    min-width: 300px; /* Prevents content from crushing too much */
-    overflow-x: auto;
+    width: 100%;
+    overflow-x: hidden;
   }
 
-  /* Keep the grids side-by-side, but allow horizontal scroll */
+  .content-area {
+    padding: 15px;
+  }
+
+  /* 4. Stack the Grids */
   .stats-grid {
-    grid-template-columns: repeat(4, 1fr); 
-    min-width: 600px; /* Forces horizontal scroll instead of stacking */
+    grid-template-columns: 1fr; /* 1 column */
+    gap: 15px;
   }
 
   .middle-grid {
-    grid-template-columns: 2fr 1fr; 
-    min-width: 600px;
+    grid-template-columns: 1fr; /* 1 column */
+    gap: 15px;
   }
 
-  /* Keep the banner side-by-side */
+  /* 5. Fix the Banner for Mobile */
   .welcome-banner {
-    flex-direction: row;
-    text-align: left;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
   }
 
   .banner-text {
-    max-width: 60%;
+    max-width: 100%;
   }
 
   .banner-image img {
-    width: 100px;
+    width: 120px;
+    margin-top: 15px;
+  }
+
+  /* 6. Stack Forms and Quick Actions */
+  .form-container form {
+    flex-direction: column;
+  }
+  
+  .action-grid {
+    grid-template-columns: 1fr; 
   }
 }
