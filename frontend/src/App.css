@@ -87,73 +87,56 @@ th { background-color: #f8fafc; color: var(--text-muted); font-weight: 600; font
 .delete-btn { background: #fee2e2; color: #ef4444; border: none; padding: 8px 16px; border-radius: 6px; font-weight: 600; cursor: pointer; transition: 0.2s; }
 .delete-btn:hover { background: #fecaca; }
 
-
 @media (max-width: 768px) {
-  /* Keep the layout side-by-side */
+  /* Force the layout to stay side-by-side */
   .app-container {
     flex-direction: row; 
-    overflow-x: auto; /* Allow scrolling if it's too wide */
+    width: 100vw;
+    height: 100vh;
+    overflow: auto; /* Allow scrolling if it overflows */
   }
 
-  /* Make the sidebar much smaller (Icon only) */
+  /* Keep the sidebar exactly the same size */
   .sidebar {
-    width: 70px; 
+    width: 200px; /* Slightly reduced from 260px to give content a bit more room */
     flex-shrink: 0;
   }
 
-  /* Hide the text in the menu, show only icons */
+  /* Keep the menu text visible */
   .menu-item {
-    justify-content: center;
-    padding: 15px 0;
-    font-size: 0; /* Hides the text */
+    padding: 12px 15px;
+    font-size: 0.9rem; 
   }
 
-  /* Make the icons bigger so they are clickable */
-  .menu-item svg {
-    font-size: 24px; 
-    margin: 0;
-  }
-
-  .logo-area {
-    font-size: 0; /* Hide "EduManage" text */
-    justify-content: center;
-    padding: 15px 0;
-  }
-  
-  .logo-area::before {
-    content: "🎓";
-    font-size: 24px; /* Show only the graduation cap */
-  }
-
-  /* Make the main content fit the rest of the screen */
+  /* Allow the main content to fill the rest of the screen */
   .main-content {
-    width: calc(100vw - 70px);
-    overflow-x: hidden;
+    width: calc(100vw - 200px);
+    min-width: 300px; /* Prevents content from crushing too much */
+    overflow-x: auto;
   }
 
-  /* Stack the cards into 1 column so they fit */
+  /* Keep the grids side-by-side, but allow horizontal scroll */
   .stats-grid {
-    grid-template-columns: 1fr; 
-    gap: 10px;
+    grid-template-columns: repeat(4, 1fr); 
+    min-width: 600px; /* Forces horizontal scroll instead of stacking */
   }
 
   .middle-grid {
-    grid-template-columns: 1fr; 
+    grid-template-columns: 2fr 1fr; 
+    min-width: 600px;
   }
 
-  /* Adjust the banner */
+  /* Keep the banner side-by-side */
   .welcome-banner {
-    flex-direction: column;
-    text-align: center;
-    padding: 15px;
+    flex-direction: row;
+    text-align: left;
   }
-  
+
   .banner-text {
-    max-width: 100%;
+    max-width: 60%;
   }
 
   .banner-image img {
     width: 100px;
-    margin-top: 10px;
   }
 }
